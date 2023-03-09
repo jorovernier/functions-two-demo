@@ -2,29 +2,42 @@
 ////// CALCULATOR //////
 ////////////////////////
 
+// Implicit Return Arrow Function
 const add = (num1, num2) => num1 + num2
-const subtract = (num1, num2) => num1 - num2
-const multiply = (num1, num2) => num1 * num2
-const divide = (num1, num2) => num1/num2
+
+// Arrow Function
+const subtract = (num1, num2) => {
+  return num1 - num2
+}
+
+// Expression Function
+const mulitply = function(num1, num2){
+  return num1 * num2
+}
+
+// Declaration Function
+function divide(num1, num2){
+  return num1 / num2
+}
 
 // console.log(Number('f')) <== returns NaN which is a falsey value
 
 const calculator = (num1, num2, callback) => {
-  if(+num1 && +num2){
+  if(Number(num1) && +num2){
     num1 = +num1
     num2 = +num2
     return callback(num1, num2)
   } else {
-    return 'Send numbers only!'
+    console.log('You need to send in numbers only.')
   }
 }
 
-let added = calculator(6, '4', add)
-let subbed = calculator(added, 3, subtract)
-console.log(subbed)
-
-console.log(calculator(45, 346, multiply))
-console.log(calculator(25, 344566, multiply))
+const result = calculator(6, 3, add)
+// console.log(result)
+const result2 = calculator('9', 7, mulitply)
+// console.log(result2)
+const result3 = calculator(6, 3, (yay, wee) => yay + wee)
+// console.log(result3)
 
 ///////////////////////
 ////// PET STORE //////
