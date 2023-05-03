@@ -2,42 +2,36 @@
 ////// CALCULATOR //////
 ////////////////////////
 
-// Implicit Return Arrow Function
-const add = (num1, num2) => num1 + num2
-
-// Arrow Function
-const subtract = (num1, num2) => {
+// Declaration Function
+function add(num1, num2){
+  return num1 + num2
+}
+// Expression Function
+const subtract = function(num1, num2){
   return num1 - num2
 }
-
-// Expression Function
-const mulitply = function(num1, num2){
+// Arrow Function
+const multiply = (num1, num2) => {
   return num1 * num2
 }
+// Implicit Return Arrow Function
+const divide = (num1, num2) => num1/num2
 
-// Declaration Function
-function divide(num1, num2){
-  return num1 / num2
-}
 
 // console.log(Number('f')) <== returns NaN which is a falsey value
 
-const calculator = (num1, num2, callback) => {
-  if(Number(num1) && +num2){
+function calculator(num1, num2, cb){
+  if(+num1 && Number(num2)){
     num1 = +num1
     num2 = +num2
-    return callback(num1, num2)
+    return cb(num1, num2)
   } else {
-    console.log('You need to send in numbers only.')
+    return 'invalid argument(s)'
   }
 }
 
-const result = calculator(6, 3, add)
-// console.log(result)
-const result2 = calculator('9', 7, mulitply)
-// console.log(result2)
-const result3 = calculator(6, 3, (yay, wee) => yay + wee)
-// console.log(result3)
+// console.log(calculator('three', 6, add))
+// console.log(calculator(42, 7, divide))
 
 ///////////////////////
 ////// PET STORE //////
@@ -160,16 +154,22 @@ const applyDiscountsByInventory = (arr, callback, amount, discount) => {
 // Higher Order Function (returns a function) ----------------------------------------------------------------
 
 function makeSandwich(bread){
-  return function(ingredients){
-    let order = `You ordered a ${bread} bread sandwich with`
+  return (ingredients) => {
+    let order = `You ordered a ${bread} bread sandwich with `
 
     for(let i = 0; i < ingredients.length; i++){
-      order += ` ${ingredients[i]}`
+      if(i === ingredients.length - 1 && i !== 0){
+        order += `and ${ingredients[i]}.`
+      } else if(ingredients.length === 1){
+        order += `${ingredients[i]}.`
+      } else {
+        order += `${ingredients[i]}, `
+      }
     }
 
     return order
   }
 }
 
-let makeBLT = makeSandwich('toasted white')
-console.log(makeBLT(['bacon', 'lettuce', 'tomato']))
+const makeWhiteSandwich = makeSandwich('white')
+console.log(makeWhiteSandwich(['turkey', 'lettuce', 'mustard']))
