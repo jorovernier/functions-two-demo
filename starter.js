@@ -18,6 +18,8 @@ const multiply = (num1, num2) => {
 const divide = (num1, num2) => num1/num2
 
 
+// This function has extra code to account for sending in a string instead of a number. The + in front of num1 converts it into a umber data type just like the Number() funciton doesn to num2.
+
 // console.log(Number('f')) <== returns NaN which is a falsey value
 
 function calculator(num1, num2, cb){
@@ -113,10 +115,9 @@ const applyDiscounts = (arr, callback, discount) => {
   }
 }
 
-// applyDiscounts(dogProducts, applyFlatRateDiscount, 3)
+// applyDiscounts(dogProducts, applyPercentDiscount, .10)
 // console.log(dogProducts)
-
-// applyDiscounts(catProducts, applyPercentDiscount, .25)
+// applyDiscounts(catProducts, applyFlatRateDiscount, 2)
 // console.log(catProducts)
 
 // Higher Order Function (accepts a callback) ----------------------------------------------------------------
@@ -171,5 +172,8 @@ function makeSandwich(bread){
   }
 }
 
-const makeWhiteSandwich = makeSandwich('white')
-console.log(makeWhiteSandwich(['turkey', 'lettuce', 'mustard']))
+const makeYummySandwich = makeSandwich('white')
+const makeIdiotSandwich = makeSandwich('hands')
+
+console.log(makeYummySandwich(['bacon','lettuce','avocado']))
+console.log(makeIdiotSandwich(['idiot']))
