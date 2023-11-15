@@ -42,6 +42,18 @@ outerFn(() => 'Fancy pants string')
 // passing in an anonymous declaration function
 outerFn(function() { return 'Fancy pants string' })
 
+// Callbacks with Parameters ------------------------------------
+
+function argFn(arg) {
+  return `I am a ${arg}!`
+}
+
+function outerArgFn(callback) {
+  console.log(callback())
+}
+
+outerArgFn(() => argFn('cool dude'))
+
 // Higher Order Functions ------------------------------------
 
 function createAdder(x) {
