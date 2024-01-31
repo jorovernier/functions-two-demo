@@ -15,26 +15,33 @@ const multiply = (num1, num2) => {
   return num1 * num2
 }
 // Implicit Return Arrow Function
-const divide = (num1, num2) => num1/num2
+const divide = (num1, num2) => num1 / num2
 
+// This works because both arguments are numbers:
+// console.log(add(6,5))
+
+// This concatenates the 5 to the 6 because the 6 is a string:
+// console.log(add('6',5))
 
 // This function has extra code to account for sending in a string instead of a number. The + in front of num1 converts it into a umber data type just like the Number() funciton doesn to num2.
 
 // console.log(Number('hi')) <== returns NaN which is a falsey value
 
-function calculator(num1, num2, cb){
+function calculator(num1, num2, callback){
   if(+num1 && Number(num2)){
     num1 = +num1
     num2 = +num2
-    return cb(num1, num2)
+    return callback(num1, num2)
   } else {
-    return 'Invalid argument(s)'
+    return 'Invalid input!'
   }
 }
 
-// console.log(calculator('hi', 6, add))
-// console.log(calculator(10, 2, divide))
-// console.log(calculator(235235, '74574', multiply))
+// This now works because we cleaned up the inputs:
+// console.log(calculator('6', 5, add))
+
+// This hits the else because 'meow' cannot be converted into a number:
+// console.log(calculator(13,'meow', divide))
 
 ///////////////////////
 ////// PET STORE //////
@@ -109,6 +116,7 @@ function applyFlatRateDiscount(product, discount){
 //   product.displayPrice = product.basePrice - discount
 // }
 
+// Testing the function before the higher order function is made:
 // applyFlatRateDiscount(dogProducts[0], 4)
 // console.log(dogProducts)
 
@@ -121,11 +129,11 @@ const applyDiscounts = (arr, callback, discount) => {
   }
 }
 
-// applyDiscounts(catProducts, applyPercentDiscount, .25)
-// applyDiscounts(dogProducts, applyFlatRateDiscount, 3)
-
-// console.log(catProducts)
+// applyDiscounts(dogProducts, applyFlatRateDiscount, 2)
 // console.log(dogProducts)
+
+// applyDiscounts(catProducts, applyPercentDiscount, .25)
+// console.log(catProducts)
 
 // Higher Order Function (accepts a callback) ----------------------------------------------------------------
 // This one will add a discount to every item that matches the passed in category in the specified array.
@@ -139,8 +147,8 @@ const applyDiscountsByCategory = (arr, category, callback, discount) => {
   }
 }
 
-// applyDiscountsByCategory(catProducts, 2, applyFlatRateDiscount, 2)
-// console.log(catProducts)
+// applyDiscountsByCategory(dogProducts, applyPercentDiscount, 1, .50)
+// console.log(dogProducts)
 
 // Higher Order Function (accepts a callback) ----------------------------------------------------------------
 // This one will add a discount to every item that has an inventory of less than the passed in amount in the specified array.
@@ -154,8 +162,8 @@ const applyDiscountsByInventory = (arr, amount, callback, discount) => {
   }
 }
 
-// applyDiscountsByInventory(dogProducts, 50, applyPercentDiscount, .75)
-// console.log(dogProducts)
+// applyDiscountsByInventory(30, catProducts, applyFlatRateDiscount, 7)
+// console.log(catProducts)
 
 ////////////////////////
 ////// SANDWICHES //////
@@ -185,19 +193,22 @@ function makeSandwich(bread){
   }
 }
 
-const makeWhiteSandwich = makeSandwich('white')
-// makeWhiteSandwich is equal to the returned function from the invocation of makeSandwich with the bread parameter being filled in by 'white'. It can be visualized like this:
+let bltIngredients = ['bacon', 'lettuce', 'avacado']
 
-// const makeWhiteSandwich = () => {
+const makeBLT = makeSandwich('toasted white')
+// makeBLT is equal to the returned function from the invocation of makeSandwich, with the bread parameter being filled in by 'toasted white'. It can be visualized like this:
+
+// const makeBLT = () => {
 //   let order = `You ordered a white bread sandwich with `
 //   if condition code goes here...
 //   return order
 // }
-console.log(makeWhiteSandwich(['bacon', 'lettuce', 'avocado']))
+console.log(makeBLT(bltIngredients))
 
-const makeIdiotSandwich = makeSandwich("Gordon Ramsay's hands")
-console.log(makeIdiotSandwich(['idiot']))
+const makeIdiotSandwich = makeSandwich("Chef Ramsay's hands")
+console.log(makeIdiotSandwich(['idiot chef']))
 
+// Testing with 2 ingredients:
 const makePitaSandwich = makeSandwich('pita')
 let gyroIngredients = ['greek steak', 'tzatziki sauce']
 console.log(makePitaSandwich(gyroIngredients))

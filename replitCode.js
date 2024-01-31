@@ -42,7 +42,7 @@ outerFn(() => 'Fancy pants string')
 // passing in an anonymous declaration function
 outerFn(function() { return 'Fancy pants string' })
 
-// Callbacks with Parameters ------------------------------------
+// Declaration Callbacks with Parameters ------------------------------------
 
 function argFn(arg) {
   return `I am a ${arg}!`
@@ -52,7 +52,19 @@ function outerArgFn(callback) {
   console.log(callback())
 }
 
-outerArgFn(() => argFn('cool dude'))
+outerArgFn(function(){
+  return argFn('cool dude')
+})
+
+// Arrow Callbacks with Parameters ------------------------------------
+
+const heWasNumberOne = name => `My name is ${name} and I am number 1!`
+
+const outer = callback => {
+  console.log(callback())
+}
+
+outer(() => heWasNumberOne('Smitty Werbenjagermanjensen'))
 
 // Higher Order Functions ------------------------------------
 
@@ -69,7 +81,15 @@ const addFive = createAdder(5)
 // }
 
 const addTen = createAdder(10)
+// const addTen = function(y) {
+//   return 10 + y
+// }
 
 console.log(addFive(12)) // output: 17
+// addFive = 5 + 12
+
 console.log(addFive(40)) // output: 45
+// addFive = 5 + 45
+
 console.log(addTen(3)) // output: 13
+// addTen = 10 + 3
